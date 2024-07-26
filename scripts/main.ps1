@@ -38,7 +38,7 @@ $env:CONTEXT_NEEDS | ConvertFrom-Json | Format-Table -AutoSize
 $env:CONTEXT_INPUTS | ConvertFrom-Json | Format-Table -AutoSize
 
 '::group::Environment Variables'
-Get-ChildItem $env: | Format-Table -AutoSize
+Get-ChildItem env: | Format-Table -AutoSize
 
 '::group::File system at [$pwd]'
 Get-ChildItem -Path . | Select-Object -ExpandProperty FullName | Sort-Object
