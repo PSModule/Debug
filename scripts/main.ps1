@@ -121,13 +121,13 @@ Write-Verbose ($n + ($CONTEXT_INPUTS.event.repository.PSObject.Properties | Fore
 } | Sort-Object Name | Format-Table -AutoSize -Wrap | Out-String))
 
 '::group::Environment Variables'
-Write-Verbose ($n + (Get-ChildItem env:))
+Write-Verbose ($n + (Get-ChildItem env: | Sort-Object Name | Format-Table -AutoSize -Wrap | Out-String))
 
 "::group::File system at [$pwd]"
-Get-ChildItem -Path . | Select-Object -ExpandProperty FullName | Sort-Object
+Write-Verbose ($n + (Get-ChildItem -Path . | Select-Object FullName | Sort-Object FullName | Format-Table -AutoSize -Wrap | Out-String))
 
 "::group::PowerShell variables"
-Get-Variable
+Write-Verbose ($n + (Get-Variable | Sort-Object Name | Format-Table -AutoSize -Wrap | Out-String))
 
 "::group::PSVersionTable"
 $PSVersionTable
