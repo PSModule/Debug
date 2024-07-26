@@ -34,4 +34,5 @@ runs:
         # CONTEXT_NEEDS: ${{ toJson(needs) }}
         CONTEXT_INPUTS: ${{ toJson(inputs) }}
       run: |
-        $GITHUB_ACTION_PATH/scripts/main.ps1
+        # Debug environment
+        . "$GITHUB_ACTION_PATH/scripts/main.ps1" -Verbose
