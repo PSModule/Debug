@@ -1,8 +1,13 @@
 [CmdletBinding()]
 param()
 
+$github = $env:CONTEXT_GITHUB | ConvertFrom-Json -Depth 100
+
 '::group::Context: [GITHUB]'
-$env:CONTEXT_GITHUB
+$github.remove(event) | ConvertTo-Json -Depth 100
+
+'::group::Context: [GITHUB_EVENT]'
+$github.event | ConvertTo-Json -Depth 100
 
 '::group::Context: [ENV]'
 $env:CONTEXT_ENV
@@ -38,7 +43,7 @@ $env:CONTEXT_NEEDS
 $env:CONTEXT_INPUTS
 
 '::group::Environment Variables'
-Get-ChildItem env: | Format-List
+Get-ChildItem env: | Format-Table -AutoSize
 
 '::group::File system at [$pwd]'
 Get-ChildItem -Path . | Select-Object -ExpandProperty FullName | Sort-Object
