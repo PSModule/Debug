@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param()
 
-$github = $env:CONTEXT_GITHUB | ConvertFrom-Json -Depth 100
+$github = $env:CONTEXT_GITHUB | ConvertFrom-Json -Depth 100 -AsHashtable
 
 '::group::Context: [GITHUB]'
 $github | Select-Object -ExcludeProperty event | Sort-Object
