@@ -21,8 +21,10 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Action-Test
+      - name: Action-Test (no param)
+        uses: ./
+
+      - name: 'Action-Test (working-directory: ./tests)'
         uses: ./
         with:
           working-directory: ./tests
-          subject: PSModule

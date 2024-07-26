@@ -13,6 +13,10 @@ inputs:
   working-directory:
     description: The working directory where the action will be executed
     required: false
+  VARS:
+    description: The vars context
+    required: false
+    default: ${{ toJson(vars) }}
 
 runs:
   using: composite
@@ -22,16 +26,16 @@ runs:
       working-directory: ${{ inputs.working-directory }}
       env:
         CONTEXT_GITHUB: ${{ toJson(github) }}
-        CONTEXT_ENV: ${{ toJson(github) }}
-        CONTEXT_VARS: ${{ toJson(vars) }}
+        CONTEXT_ENV: ${{ toJson(env) }}
+        CONTEXT_VARS: ${{ inputs.vars }}
         CONTEXT_JOB: ${{ toJson(job) }}
-        CONTEXT_JOBS: ${{ toJson(jobs) }}
+        # CONTEXT_JOBS: ${{ toJson(jobs) }}
         CONTEXT_STEPS: ${{ toJson(steps) }}
         CONTEXT_RUNNER: ${{ toJson(runner) }}
-        CONTEXT_SECRETS: ${{ toJson(secrets) }}
+        # CONTEXT_SECRETS: ${{ toJson(secrets) }}
         CONTEXT_STRATEGY: ${{ toJson(strategy) }}
         CONTEXT_MATRIX: ${{ toJson(matrix) }}
-        CONTEXT_NEEDS: ${{ toJson(needs) }}
+        # CONTEXT_NEEDS: ${{ toJson(needs) }}
         CONTEXT_INPUTS: ${{ toJson(inputs) }}
       run: |
         $GITHUB_ACTION_PATH/scripts/main.ps1
