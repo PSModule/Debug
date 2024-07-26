@@ -1,3 +1,6 @@
+[CmdletBinding()]
+param()
+
 '::group::Context: [GITHUB]'
 $env:CONTEXT_GITHUB | ConvertFrom-Json | Format-Table -AutoSize
 
