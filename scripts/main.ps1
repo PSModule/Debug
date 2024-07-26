@@ -83,3 +83,6 @@ Get-ChildItem env: | Format-Table -AutoSize
 
 "::group::File system at [$pwd]"
 Get-ChildItem -Path . | Select-Object -ExpandProperty FullName | Sort-Object
+
+"::group::PowerShell variables"
+Get-Variable
