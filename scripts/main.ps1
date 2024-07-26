@@ -6,12 +6,12 @@ $n = [System.Environment]::NewLine
 
 
 '::group::Context: [GITHUB]'
-Write-Verbose ($n + $github.PSObject.Properties | Where-Object { $_.Name -ne 'event' } | Foreach-Object {
+Write-Verbose ($n + ($github.PSObject.Properties | Where-Object { $_.Name -ne 'event' } | Foreach-Object {
     [pscustomobject]@{
         Name = $_.Name
         Value = $_.Value
     }
-} | Sort-Object Name | Out-String)
+} | Sort-Object Name | Out-String))
 
 '::group::Context: [GITHUB_EVENT]'
 Write-Verbose ($n + $github.event.PSObject.Properties | Where-Object { $_.Name -ne 'event' } | Foreach-Object {
