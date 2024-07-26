@@ -13,10 +13,6 @@ inputs:
   working-directory:
     description: The working directory where the action will be executed
     required: false
-  VARS:
-    description: The vars context
-    required: false
-    default: ${{ toJson(vars) }}
 
 runs:
   using: composite
