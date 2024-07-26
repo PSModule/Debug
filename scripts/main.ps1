@@ -6,12 +6,7 @@ $n = [System.Environment]::NewLine
 
 $CONTEXT_GITHUB = $env:CONTEXT_GITHUB | ConvertFrom-Json -Depth 100
 '::group::Context: [GITHUB]'
-Write-Verbose ($n + ($CONTEXT_GITHUB.PSObject.Properties | Where-Object { $_.Name -ne 'event' } | Foreach-Object {
-    [pscustomobject]@{
-        Name = $_.Name
-        Value = $_.Value
-    }
-} | Sort-Object Name | Format-Table -AutoSize -Wrap | Out-String))
+$CONTEXT_GITHUB | Select-Object -ExcludeProperty event | ConvertTo-Json -Depth 100
 
 '::group::Context: [GITHUB_EVENT]'
 Write-Verbose ($n + ($CONTEXT_GITHUB.event.PSObject.Properties | Foreach-Object {
