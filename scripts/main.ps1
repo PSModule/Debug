@@ -21,14 +21,14 @@ $github.event.repository | Sort-Object
 '::group::Context: [ENV]'
 $env:CONTEXT_ENV
 
-'::group::Context: [VARS]'
-$env:CONTEXT_VARS
+# '::group::Context: [VARS]'
+# $env:CONTEXT_VARS
 
 '::group::Context: [JOB]'
 $env:CONTEXT_JOB
 
-'::group::Context: [JOBS]'
-$env:CONTEXT_JOBS
+# '::group::Context: [JOBS]'
+# $env:CONTEXT_JOBS
 
 '::group::Context: [STEPS]'
 $env:CONTEXT_STEPS
@@ -36,8 +36,8 @@ $env:CONTEXT_STEPS
 '::group::Context: [RUNNER]'
 $env:CONTEXT_RUNNER | ConvertFrom-Json | Sort-Object
 
-'::group::Context: [SECRETS]'
-$env:CONTEXT_SECRETS | ConvertFrom-Json | Sort-Object
+# '::group::Context: [SECRETS]'
+# $env:CONTEXT_SECRETS
 
 '::group::Context: [STRATEGY]'
 $env:CONTEXT_STRATEGY | ConvertFrom-Json | Sort-Object
@@ -45,8 +45,8 @@ $env:CONTEXT_STRATEGY | ConvertFrom-Json | Sort-Object
 '::group::Context: [MATRIX]'
 $env:CONTEXT_MATRIX | ConvertFrom-Json | Sort-Object
 
-'::group::Context: [NEEDS]'
-$env:CONTEXT_NEEDS | ConvertFrom-Json | Sort-Object
+# '::group::Context: [NEEDS]'
+# $env:CONTEXT_NEEDS
 
 '::group::Context: [INPUTS]'
 $env:CONTEXT_INPUTS | ConvertFrom-Json | Sort-Object
