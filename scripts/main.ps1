@@ -11,7 +11,7 @@ Write-Verbose ($n + ($github.PSObject.Properties | Where-Object { $_.Name -ne 'e
         Name = $_.Name
         Value = $_.Value
     }
-} | Sort-Object Name | Out-String | Format-Table -AutoSize | Out-String))
+} | Sort-Object Name | Out-String | Format-Table -AutoSize -Wrap | Out-String))
 
 '::group::Context: [GITHUB_EVENT]'
 Write-Verbose ($n + ($github.event.PSObject.Properties | Where-Object { $_.Name -ne 'event' } | Foreach-Object {
@@ -19,7 +19,7 @@ Write-Verbose ($n + ($github.event.PSObject.Properties | Where-Object { $_.Name 
         Name = $_.Name
         Value = $_.Value
     }
-} | Sort-Object Name | Out-String))
+} | Sort-Object Name | Out-String | Format-Table -AutoSize -Wrap | Out-String))
 
 '::group::Context: [GITHUB_EVENT_ENTERPRISE]'
 Write-Verbose ($n + ($github.event.enterprise.PSObject.Properties | Where-Object { $_.Name -ne 'event' } | Foreach-Object {
@@ -27,7 +27,7 @@ Write-Verbose ($n + ($github.event.enterprise.PSObject.Properties | Where-Object
         Name = $_.Name
         Value = $_.Value
     }
-} | Sort-Object Name | Out-String))
+} | Sort-Object Name | Out-String | Format-Table -AutoSize -Wrap | Out-String))
 
 '::group::Context: [GITHUB_EVENT_ORGANIZATION]'
 Write-Verbose ($n + ($github.event.organization.PSObject.Properties | Where-Object { $_.Name -ne 'event' } | Foreach-Object {
@@ -35,7 +35,7 @@ Write-Verbose ($n + ($github.event.organization.PSObject.Properties | Where-Obje
         Name = $_.Name
         Value = $_.Value
     }
-} | Sort-Object Name | Out-String))
+} | Sort-Object Name | Out-String | Format-Table -AutoSize -Wrap | Out-String))
 
 '::group::Context: [GITHUB_EVENT_REPOSITORY]'
 Write-Verbose ($n + ($github.event.repository.PSObject.Properties | Where-Object { $_.Name -ne 'event' } | Foreach-Object {
@@ -43,7 +43,7 @@ Write-Verbose ($n + ($github.event.repository.PSObject.Properties | Where-Object
         Name = $_.Name
         Value = $_.Value
     }
-} | Sort-Object Name | Out-String))
+} | Sort-Object Name | Out-String | Format-Table -AutoSize -Wrap | Out-String))
 
 '::group::Context: [ENV]'
 $env:CONTEXT_ENV
