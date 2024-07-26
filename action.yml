@@ -1,26 +1,37 @@
-name: My Action
-description: Action description
+name: Debug (by PSModule)
+description: |
+  Print info from the runner environment to logs.
+  Uses all the contexts and environment variables.
+  - [Contexts | GitHub Docs](https://docs.github.com/en/actions/learn-github-actions/contexts)
+  - [Variables] | GitHub Docs](https://docs.github.com/en/actions/learn-github-actions/variables#default-environment-variables)
 author: PSModule
 branding:
-  icon: upload-cloud
-  color: white
+  icon: clipboard
+  color: gray
 
 inputs:
   working-directory:
-    description: The working directory where Terraform will be executed
+    description: The working directory where the action will be executed
     required: false
-  subject:
-    description: The subject to greet
-    required: false
-    default: World
 
 runs:
   using: composite
   steps:
-    - name: My Action
+    - name: Debug
       shell: pwsh
       working-directory: ${{ inputs.working-directory }}
       env:
-        GITHUB_ACTION_INPUT_subject: ${{ inputs.subject }}
+        CONTEXT_GITHUB: ${{ toJson(github) }}
+        CONTEXT_ENV: ${{ toJson(github) }}
+        CONTEXT_VARS: ${{ toJson(vars) }}
+        CONTEXT_JOB: ${{ toJson(job) }}
+        CONTEXT_JOBS: ${{ toJson(jobs) }}
+        CONTEXT_STEPS: ${{ toJson(steps) }}
+        CONTEXT_RUNNER: ${{ toJson(runner) }}
+        CONTEXT_SECRETS: ${{ toJson(secrets) }}
+        CONTEXT_STRATEGY: ${{ toJson(strategy) }}
+        CONTEXT_MATRIX: ${{ toJson(matrix) }}
+        CONTEXT_NEEDS: ${{ toJson(needs) }}
+        CONTEXT_INPUTS: ${{ toJson(inputs) }}
       run: |
         $GITHUB_ACTION_PATH/scripts/main.ps1
