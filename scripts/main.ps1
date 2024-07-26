@@ -2,33 +2,46 @@
 param()
 
 $github = $env:CONTEXT_GITHUB | ConvertFrom-Json -Depth 100
-'--------------'
-$github | gm
-'--------------'
-$github.gettype()
-'--------------'
 
-$github = $github.PSObject.Properties | Foreach-Object {
+'::group::Context: [GITHUB]'
+$github.PSObject.Properties | Where-Object { $_.Name -ne 'event' } | Foreach-Object {
     [pscustomobject]@{
         Name = $_.Name
         Value = $_.Value
     }
-}
-
-'::group::Context: [GITHUB]'
-$github | Select-Object -ExcludeProperty event | Sort-Object Name
+} | Sort-Object Name
 
 '::group::Context: [GITHUB_EVENT]'
-$github.event | ConvertTo-Json -Depth 100
+$github.event.PSObject.Properties | Where-Object { $_.Name -ne 'event' } | Foreach-Object {
+    [pscustomobject]@{
+        Name = $_.Name
+        Value = $_.Value
+    }
+} | Sort-Object Name
 
 '::group::Context: [GITHUB_EVENT_ENTERPRISE]'
-$github.event.enterprise | Sort-Object Name
+$github.event.enterprise.PSObject.Properties | Where-Object { $_.Name -ne 'event' } | Foreach-Object {
+    [pscustomobject]@{
+        Name = $_.Name
+        Value = $_.Value
+    }
+} | Sort-Object Name
 
 '::group::Context: [GITHUB_EVENT_ORGANIZATION]'
-$github.event.organization | Sort-Object Name
+$github.event.organization.PSObject.Properties | Where-Object { $_.Name -ne 'event' } | Foreach-Object {
+    [pscustomobject]@{
+        Name = $_.Name
+        Value = $_.Value
+    }
+} | Sort-Object Name
 
 '::group::Context: [GITHUB_EVENT_REPOSITORY]'
-$github.event.repository | Sort-Object Name
+$github.event.repository.PSObject.Properties | Where-Object { $_.Name -ne 'event' } | Foreach-Object {
+    [pscustomobject]@{
+        Name = $_.Name
+        Value = $_.Value
+    }
+} | Sort-Object Name
 
 '::group::Context: [ENV]'
 $env:CONTEXT_ENV
