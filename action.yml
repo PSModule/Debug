@@ -13,6 +13,7 @@ inputs:
   working-directory:
     description: The working directory where the action will be executed
     required: false
+    default: ${{ github.workspace }}
 
 runs:
   using: composite
