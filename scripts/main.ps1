@@ -2,6 +2,12 @@
 param()
 
 $github = $env:CONTEXT_GITHUB | ConvertFrom-Json -Depth 100
+'--------------'
+$github | gm
+'--------------'
+$github.gettype()
+'--------------'
+
 $github = $github.PSObject.Properties | Foreach-Object {
     [pscustomobject]@{
         Name = $_.Name
