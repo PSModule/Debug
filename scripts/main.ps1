@@ -1,7 +1,13 @@
 [CmdletBinding()]
 param()
 
-$github = $env:CONTEXT_GITHUB | ConvertFrom-Json -Depth 100 -AsHashtable
+$github = $env:CONTEXT_GITHUB | ConvertFrom-Json -Depth 100
+$github = $github.PSObject.Properties | Foreach-Object {
+    [pscustomobject]@{
+        Name = $_.Name
+        Value = $_.Value
+    }
+}
 
 '::group::Context: [GITHUB]'
 $github | Select-Object -ExcludeProperty event | Sort-Object Name
