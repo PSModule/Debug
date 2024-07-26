@@ -2,46 +2,46 @@
 param()
 
 $github = $env:CONTEXT_GITHUB | ConvertFrom-Json -Depth 100
-
+$n = [System.Environment]::NewLine
 '::group::Context: [GITHUB]'
-$github.PSObject.Properties | Where-Object { $_.Name -ne 'event' } | Foreach-Object {
+Write-Verbose ($n + $github.PSObject.Properties | Where-Object { $_.Name -ne 'event' } | Foreach-Object {
     [pscustomobject]@{
         Name = $_.Name
         Value = $_.Value
     }
-} | Sort-Object Name
+} | Sort-Object Name | Select-Object Name, Value | Out-String)
 
-'::group::Context: [GITHUB_EVENT]'
+Write-Verbose ($n + '::group::Context: [GITHUB_EVENT]'
 $github.event.PSObject.Properties | Where-Object { $_.Name -ne 'event' } | Foreach-Object {
     [pscustomobject]@{
         Name = $_.Name
         Value = $_.Value
     }
-} | Sort-Object Name
+} | Sort-Object Name | Select-Object Name, Value | Out-String)
 
 '::group::Context: [GITHUB_EVENT_ENTERPRISE]'
-$github.event.enterprise.PSObject.Properties | Where-Object { $_.Name -ne 'event' } | Foreach-Object {
+Write-Verbose ($n + $github.event.enterprise.PSObject.Properties | Where-Object { $_.Name -ne 'event' } | Foreach-Object {
     [pscustomobject]@{
         Name = $_.Name
         Value = $_.Value
     }
-} | Sort-Object Name
+} | Sort-Object Name | Select-Object Name, Value | Out-String)
 
 '::group::Context: [GITHUB_EVENT_ORGANIZATION]'
-$github.event.organization.PSObject.Properties | Where-Object { $_.Name -ne 'event' } | Foreach-Object {
+Write-Verbose ($n + $github.event.organization.PSObject.Properties | Where-Object { $_.Name -ne 'event' } | Foreach-Object {
     [pscustomobject]@{
         Name = $_.Name
         Value = $_.Value
     }
-} | Sort-Object Name
+} | Sort-Object Name | Select-Object Name, Value | Out-String)
 
 '::group::Context: [GITHUB_EVENT_REPOSITORY]'
-$github.event.repository.PSObject.Properties | Where-Object { $_.Name -ne 'event' } | Foreach-Object {
+Write-Verbose ($n + $github.event.repository.PSObject.Properties | Where-Object { $_.Name -ne 'event' } | Foreach-Object {
     [pscustomobject]@{
         Name = $_.Name
         Value = $_.Value
     }
-} | Sort-Object Name
+} | Sort-Object Name | Select-Object Name, Value | Out-String)
 
 '::group::Context: [ENV]'
 $env:CONTEXT_ENV
