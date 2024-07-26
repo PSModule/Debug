@@ -1,85 +1,127 @@
 [CmdletBinding()]
 param()
 
-$github = $env:CONTEXT_GITHUB | ConvertFrom-Json -Depth 100
 $n = [System.Environment]::NewLine
 
 
+$CONTEXT_GITHUB = $env:CONTEXT_GITHUB | ConvertFrom-Json -Depth 100
 '::group::Context: [GITHUB]'
-Write-Verbose ($n + ($github.PSObject.Properties | Where-Object { $_.Name -ne 'event' } | Foreach-Object {
+Write-Verbose ($n + ($CONTEXT_GITHUB.PSObject.Properties | Where-Object { $_.Name -ne 'event' } | Foreach-Object {
     [pscustomobject]@{
         Name = $_.Name
         Value = $_.Value
     }
-} | Sort-Object Name | Out-String | Format-Table -AutoSize -Wrap | Out-String))
+} | Sort-Object Name | Format-Table -AutoSize -Wrap | Out-String))
 
 '::group::Context: [GITHUB_EVENT]'
-Write-Verbose ($n + ($github.event.PSObject.Properties | Where-Object { $_.Name -ne 'event' } | Foreach-Object {
+Write-Verbose ($n + ($CONTEXT_GITHUB.event.PSObject.Properties | Foreach-Object {
     [pscustomobject]@{
         Name = $_.Name
         Value = $_.Value
     }
-} | Sort-Object Name | Out-String | Format-Table -AutoSize -Wrap | Out-String))
+} | Sort-Object Name | Format-Table -AutoSize -Wrap | Out-String))
 
 '::group::Context: [GITHUB_EVENT_ENTERPRISE]'
-Write-Verbose ($n + ($github.event.enterprise.PSObject.Properties | Where-Object { $_.Name -ne 'event' } | Foreach-Object {
+Write-Verbose ($n + ($CONTEXT_GITHUB.event.enterprise.PSObject.Properties | Foreach-Object {
     [pscustomobject]@{
         Name = $_.Name
         Value = $_.Value
     }
-} | Sort-Object Name | Out-String | Format-Table -AutoSize -Wrap | Out-String))
+} | Sort-Object Name | Format-Table -AutoSize -Wrap | Out-String))
 
 '::group::Context: [GITHUB_EVENT_ORGANIZATION]'
-Write-Verbose ($n + ($github.event.organization.PSObject.Properties | Where-Object { $_.Name -ne 'event' } | Foreach-Object {
+Write-Verbose ($n + ($CONTEXT_GITHUB.event.organization.PSObject.Properties | Foreach-Object {
     [pscustomobject]@{
         Name = $_.Name
         Value = $_.Value
     }
-} | Sort-Object Name | Out-String | Format-Table -AutoSize -Wrap | Out-String))
+} | Sort-Object Name | Format-Table -AutoSize -Wrap | Out-String))
 
 '::group::Context: [GITHUB_EVENT_REPOSITORY]'
-Write-Verbose ($n + ($github.event.repository.PSObject.Properties | Where-Object { $_.Name -ne 'event' } | Foreach-Object {
+Write-Verbose ($n + ($CONTEXT_GITHUB.event.repository.PSObject.Properties | Foreach-Object {
     [pscustomobject]@{
         Name = $_.Name
         Value = $_.Value
     }
-} | Sort-Object Name | Out-String | Format-Table -AutoSize -Wrap | Out-String))
+} | Sort-Object Name | Format-Table -AutoSize -Wrap | Out-String))
 
 '::group::Context: [ENV]'
-$env:CONTEXT_ENV
+$CONTEXT_ENV = $env:CONTEXT_ENV | ConvertFrom-Json -Depth 100
+Write-Verbose ($n + ($context_env.event.repository.PSObject.Properties | Foreach-Object {
+    [pscustomobject]@{
+        Name = $_.Name
+        Value = $_.Value
+    }
+} | Sort-Object Name | Format-Table -AutoSize -Wrap | Out-String))
 
 # '::group::Context: [VARS]'
 # $env:CONTEXT_VARS
 
 '::group::Context: [JOB]'
-$env:CONTEXT_JOB
+$CONTEXT_JOB = $env:CONTEXT_JOB | ConvertFrom-Json -Depth 100
+Write-Verbose ($n + ($CONTEXT_JOB.event.repository.PSObject.Properties | Foreach-Object {
+    [pscustomobject]@{
+        Name = $_.Name
+        Value = $_.Value
+    }
+} | Sort-Object Name | Format-Table -AutoSize -Wrap | Out-String))
 
 # '::group::Context: [JOBS]'
 # $env:CONTEXT_JOBS
 
 '::group::Context: [STEPS]'
-$env:CONTEXT_STEPS
+$CONTEXT_STEPS = $env:CONTEXT_STEPS | ConvertFrom-Json -Depth 100
+Write-Verbose ($n + ($CONTEXT_STEPS.event.repository.PSObject.Properties | Foreach-Object {
+    [pscustomobject]@{
+        Name = $_.Name
+        Value = $_.Value
+    }
+} | Sort-Object Name | Format-Table -AutoSize -Wrap | Out-String))
 
 '::group::Context: [RUNNER]'
-$env:CONTEXT_RUNNER | ConvertFrom-Json | Sort-Object
+$CONTEXT_RUNNER = $env:CONTEXT_RUNNER | ConvertFrom-Json -Depth 100
+Write-Verbose ($n + ($CONTEXT_RUNNER.event.repository.PSObject.Properties | Foreach-Object {
+    [pscustomobject]@{
+        Name = $_.Name
+        Value = $_.Value
+    }
+} | Sort-Object Name | Format-Table -AutoSize -Wrap | Out-String))
 
 # '::group::Context: [SECRETS]'
 # $env:CONTEXT_SECRETS
 
 '::group::Context: [STRATEGY]'
-$env:CONTEXT_STRATEGY | ConvertFrom-Json | Sort-Object
+$CONTEXT_STRATEGY = $env:CONTEXT_STRATEGY | ConvertFrom-Json -Depth 100
+Write-Verbose ($n + ($CONTEXT_STRATEGY.event.repository.PSObject.Properties | Foreach-Object {
+    [pscustomobject]@{
+        Name = $_.Name
+        Value = $_.Value
+    }
+} | Sort-Object Name | Format-Table -AutoSize -Wrap | Out-String))
 
 '::group::Context: [MATRIX]'
-$env:CONTEXT_MATRIX | ConvertFrom-Json | Sort-Object
+$CONTEXT_MATRIX = $env:CONTEXT_MATRIX | ConvertFrom-Json -Depth 100
+Write-Verbose ($n + ($CONTEXT_MATRIX.event.repository.PSObject.Properties | Foreach-Object {
+    [pscustomobject]@{
+        Name = $_.Name
+        Value = $_.Value
+    }
+} | Sort-Object Name | Format-Table -AutoSize -Wrap | Out-String))
 
 # '::group::Context: [NEEDS]'
 # $env:CONTEXT_NEEDS
 
 '::group::Context: [INPUTS]'
-$env:CONTEXT_INPUTS | ConvertFrom-Json | Sort-Object
+$CONTEXT_INPUTS = $env:CONTEXT_INPUTS | ConvertFrom-Json -Depth 100
+Write-Verbose ($n + ($CONTEXT_INPUTS.event.repository.PSObject.Properties | Foreach-Object {
+    [pscustomobject]@{
+        Name = $_.Name
+        Value = $_.Value
+    }
+} | Sort-Object Name | Format-Table -AutoSize -Wrap | Out-String))
 
 '::group::Environment Variables'
-Get-ChildItem env: | Format-Table -AutoSize
+Write-Verbose ($n + (Get-ChildItem env:))
 
 "::group::File system at [$pwd]"
 Get-ChildItem -Path . | Select-Object -ExpandProperty FullName | Sort-Object
