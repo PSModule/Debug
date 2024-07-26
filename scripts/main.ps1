@@ -1,10 +1,10 @@
 [CmdletBinding()]
 param()
 
-$github = $env:CONTEXT_GITHUB | ConvertFrom-Json -Depth 100
+$github = $env:CONTEXT_GITHUB | ConvertFrom-Json -Depth 100 -AsHashtable
 
 '::group::Context: [GITHUB]'
-($github | Select-Object -ExcludeProperty event).PSObject.Properties | Sort-Object Name | Select-Object -Properties Name, Value
+$github | Select-Object -ExcludeProperty event | Sort-Object Name
 
 '::group::Context: [GITHUB_EVENT]'
 $github.event | ConvertTo-Json -Depth 100
