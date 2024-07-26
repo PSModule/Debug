@@ -57,10 +57,10 @@ $env:CONTEXT_INPUTS
 Get-ChildItem -Path . | Select-Object FullName | Sort-Object FullName | Format-Table -AutoSize -Wrap
 
 '::group::Environment Variables'
-Get-ChildItem env: | Where-Object {€_.Name -notlike 'CONTEXT_*'} | Sort-Object Name | Format-Table -AutoSize -Wrap
+Get-ChildItem env: | Where-Object {$_.Name -notlike 'CONTEXT_*'} | Sort-Object Name | Format-Table -AutoSize -Wrap
 
 "::group::PowerShell variables"
-Get-Variable | Where-Object {€_.Name -notlike 'CONTEXT_*'} | Sort-Object Name | Format-Table -AutoSize -Wrap
+Get-Variable | Where-Object {$_.Name -notlike 'CONTEXT_*'} | Sort-Object Name | Format-Table -AutoSize -Wrap
 
 "::group::PSVersionTable"
 $PSVersionTable | Select-Object *
