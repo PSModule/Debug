@@ -4,7 +4,7 @@ description: |
 author: PSModule
 branding:
   icon: clipboard
-  color: gray
+  color: grey
 
 runs:
   using: composite
