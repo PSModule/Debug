@@ -63,22 +63,22 @@ Get-ChildItem -Path . | Select-Object FullName | Sort-Object FullName | Format-T
 Get-Variable | Sort-Object Name | Format-Table -AutoSize -Wrap
 
 "::group::PSVersionTable"
-$PSVersionTable | Format-Table
+$PSVersionTable | Select-Object *
 
 "::group::ExecutionContext"
-$ExecutionContext | Format-Table
+$ExecutionContext | Select-Object *
 
 "::group::Host"
-$Host | Format-Table
+$Host | Select-Object *
 
 "::group::MyInvocation"
-$MyInvocation | Format-Table
+$MyInvocation | Select-Object *
 
 "::group::PSCmdlet"
-$PSCmdlet | Format-Table
+$PSCmdlet | Select-Object *
 
 "::group::PSSessionOption"
-$PSSessionOption | Format-Table
+$PSSessionOption | Select-Object *
 
 "::group::PSStyle"
-$PSStyle | Format-Table
+$PSStyle | Select-Object *
