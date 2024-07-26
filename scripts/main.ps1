@@ -4,7 +4,7 @@ param()
 $github = $env:CONTEXT_GITHUB | ConvertFrom-Json -Depth 100
 
 '::group::Context: [GITHUB]'
-$github.remove(event) | ConvertTo-Json -Depth 100
+$github | Select-Object -ExcludeProperty event
 
 '::group::Context: [GITHUB_EVENT]'
 $github.event | ConvertTo-Json -Depth 100
