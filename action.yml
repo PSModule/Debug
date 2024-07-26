@@ -9,18 +9,11 @@ branding:
   icon: clipboard
   color: gray
 
-inputs:
-  working-directory:
-    description: The working directory where the action will be executed
-    required: false
-    default: ${{ github.workspace }}
-
 runs:
   using: composite
   steps:
     - name: Debug
       shell: pwsh
-      working-directory: ${{ inputs.working-directory }}
       env:
         CONTEXT_GITHUB: ${{ toJson(github) }}
         CONTEXT_ENV: ${{ toJson(env) }}
