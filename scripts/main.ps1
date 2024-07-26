@@ -13,8 +13,8 @@ $env:CONTEXT_VARS | ConvertFrom-Json | Format-Table -AutoSize
 '::group::Context: [JOB]'
 $env:CONTEXT_JOB | ConvertFrom-Json | Format-Table -AutoSize
 
-'::group::Context: [JOBS]'
-$env:CONTEXT_JOBS | ConvertFrom-Json | Format-Table -AutoSize
+# '::group::Context: [JOBS]'
+# $env:CONTEXT_JOBS | ConvertFrom-Json | Format-Table -AutoSize
 
 '::group::Context: [STEPS]'
 $env:CONTEXT_STEPS | ConvertFrom-Json | Format-Table -AutoSize
@@ -22,8 +22,8 @@ $env:CONTEXT_STEPS | ConvertFrom-Json | Format-Table -AutoSize
 '::group::Context: [RUNNER]'
 $env:CONTEXT_RUNNER | ConvertFrom-Json | Format-Table -AutoSize
 
-'::group::Context: [SECRETS]'
-$env:CONTEXT_SECRETS | ConvertFrom-Json | Format-Table -AutoSize
+# '::group::Context: [SECRETS]'
+# $env:CONTEXT_SECRETS | ConvertFrom-Json | Format-Table -AutoSize
 
 '::group::Context: [STRATEGY]'
 $env:CONTEXT_STRATEGY | ConvertFrom-Json | Format-Table -AutoSize
@@ -31,8 +31,8 @@ $env:CONTEXT_STRATEGY | ConvertFrom-Json | Format-Table -AutoSize
 '::group::Context: [MATRIX]'
 $env:CONTEXT_MATRIX | ConvertFrom-Json | Format-Table -AutoSize
 
-'::group::Context: [NEEDS]'
-$env:CONTEXT_NEEDS | ConvertFrom-Json | Format-Table -AutoSize
+# '::group::Context: [NEEDS]'
+# $env:CONTEXT_NEEDS | ConvertFrom-Json | Format-Table -AutoSize
 
 '::group::Context: [INPUTS]'
 $env:CONTEXT_INPUTS | ConvertFrom-Json | Format-Table -AutoSize
