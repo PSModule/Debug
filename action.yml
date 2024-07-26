@@ -29,4 +29,4 @@ runs:
         CONTEXT_INPUTS: ${{ toJson(inputs) }}
       run: |
         # Debug environment
-        . "$GITHUB_ACTION_PATH/scripts/main.ps1" -Verbose
+        . "$env:GITHUB_ACTION_PATH\scripts\main.ps1" -Verbose
