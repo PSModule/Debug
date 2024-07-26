@@ -54,5 +54,5 @@ $env:CONTEXT_INPUTS | ConvertFrom-Json | Sort-Object
 '::group::Environment Variables'
 Get-ChildItem env: | Format-Table -AutoSize
 
-'::group::File system at [$pwd]'
+"::group::File system at [$pwd]"
 Get-ChildItem -Path . | Select-Object -ExpandProperty FullName | Sort-Object
