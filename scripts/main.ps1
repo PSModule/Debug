@@ -3,6 +3,8 @@ param()
 
 $github = $env:CONTEXT_GITHUB | ConvertFrom-Json -Depth 100
 $n = [System.Environment]::NewLine
+
+
 '::group::Context: [GITHUB]'
 Write-Verbose ($n + $github.PSObject.Properties | Where-Object { $_.Name -ne 'event' } | Foreach-Object {
     [pscustomobject]@{
@@ -11,8 +13,8 @@ Write-Verbose ($n + $github.PSObject.Properties | Where-Object { $_.Name -ne 'ev
     }
 } | Sort-Object Name | Select-Object Name, Value | Out-String)
 
-Write-Verbose ($n + '::group::Context: [GITHUB_EVENT]'
-$github.event.PSObject.Properties | Where-Object { $_.Name -ne 'event' } | Foreach-Object {
+'::group::Context: [GITHUB_EVENT]'
+Write-Verbose ($n + $github.event.PSObject.Properties | Where-Object { $_.Name -ne 'event' } | Foreach-Object {
     [pscustomobject]@{
         Name = $_.Name
         Value = $_.Value
