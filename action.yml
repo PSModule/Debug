@@ -17,7 +17,7 @@ runs:
       env:
         CONTEXT_GITHUB: ${{ toJson(github) }}
         CONTEXT_ENV: ${{ toJson(env) }}
-        CONTEXT_VARS: ${{ inputs.vars }}
+        # CONTEXT_VARS: ${{ toJson(vars) }}
         CONTEXT_JOB: ${{ toJson(job) }}
         # CONTEXT_JOBS: ${{ toJson(jobs) }}
         CONTEXT_STEPS: ${{ toJson(steps) }}

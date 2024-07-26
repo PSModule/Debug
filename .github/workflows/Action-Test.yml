@@ -23,9 +23,3 @@ jobs:
 
       - name: Action-Test (no param)
         uses: ./
-
-      - name: 'Action-Test (working-directory: ./tests)'
-        uses: ./
-        with:
-          working-directory: ./tests
-          VARS: ${{ toJson(vars) }}
