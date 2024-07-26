@@ -11,7 +11,7 @@ Write-Verbose ($n + ($github.PSObject.Properties | Where-Object { $_.Name -ne 'e
         Name = $_.Name
         Value = $_.Value
     }
-} | Sort-Object Name | Out-String | Format-Table -AutoSize))
+} | Sort-Object Name | Out-String | Format-Table -AutoSize | Out-String))
 
 '::group::Context: [GITHUB_EVENT]'
 Write-Verbose ($n + ($github.event.PSObject.Properties | Where-Object { $_.Name -ne 'event' } | Foreach-Object {
