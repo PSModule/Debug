@@ -1,84 +1,121 @@
+#REQUIRES -Modules GitHub
+
 [CmdletBinding()]
 param()
 
-$n = [System.Environment]::NewLine
-
-
 $CONTEXT_GITHUB = $env:CONTEXT_GITHUB | ConvertFrom-Json -Depth 100
-'::group::Context: [GITHUB]'
-$CONTEXT_GITHUB | ConvertTo-Json -Depth 100
 
-'::group::Context: [GITHUB_EVENT]'
-$CONTEXT_GITHUB.event | ConvertTo-Json -Depth 100
+LogGroup 'Context: [GITHUB]' {
+    $CONTEXT_GITHUB | ConvertTo-Json -Depth 100
+}
 
-'::group::Context: [GITHUB_EVENT_ENTERPRISE]'
-$CONTEXT_GITHUB | ConvertTo-Json -Depth 100
+LogGroup 'Context: [GITHUB_EVENT]' {
+    $CONTEXT_GITHUB.event | ConvertTo-Json -Depth 100
+}
 
-'::group::Context: [GITHUB_EVENT_ORGANIZATION]'
-$CONTEXT_GITHUB.event.organization | ConvertTo-Json -Depth 100
+LogGroup 'Context: [GITHUB_EVENT_ENTERPRISE]' {
+    $CONTEXT_GITHUB | ConvertTo-Json -Depth 100
+}
 
-'::group::Context: [GITHUB_EVENT_REPOSITORY]'
-$CONTEXT_GITHUB.event.repository | ConvertTo-Json -Depth 100
+LogGroup 'Context: [GITHUB_EVENT_ORGANIZATION]' {
+    $CONTEXT_GITHUB.event.organization | ConvertTo-Json -Depth 100
+}
 
-'::group::Context: [ENV]'
-$env:CONTEXT_ENV
+LogGroup 'Context: [GITHUB_EVENT_REPOSITORY]' {
+    $CONTEXT_GITHUB.event.repository | ConvertTo-Json -Depth 100
+}
 
-# '::group::Context: [VARS]'
+LogGroup 'Context: [ENV]' {
+    $env:CONTEXT_ENV
+}
+
+# LogGroup 'Context: [VARS]' {
 # $env:CONTEXT_VARS
+# }
 
-'::group::Context: [JOB]'
-$env:CONTEXT_JOB
+LogGroup 'Context: [JOB]' {
+    $env:CONTEXT_JOB
+}
 
-# '::group::Context: [JOBS]'
+# LogGroup 'Context: [JOBS]' {
 # $env:CONTEXT_JOBS
+# }
 
-'::group::Context: [STEPS]'
-$env:CONTEXT_STEPS
+LogGroup 'Context: [STEPS]' {
+    $env:CONTEXT_STEPS
+}
 
-'::group::Context: [RUNNER]'
-$env:CONTEXT_RUNNER
+LogGroup 'Context: [RUNNER]' {
+    $env:CONTEXT_RUNNER
+}
 
-# '::group::Context: [SECRETS]'
+# LogGroup 'Context: [SECRETS]' {
 # $env:CONTEXT_SECRETS
+# }
 
-'::group::Context: [STRATEGY]'
-$env:CONTEXT_STRATEGY
+LogGroup 'Context: [STRATEGY]' {
+    $env:CONTEXT_STRATEGY
+}
 
-'::group::Context: [MATRIX]'
-$env:CONTEXT_MATRIX
+LogGroup 'Context: [MATRIX]' {
+    $env:CONTEXT_MATRIX
+}
 
-# '::group::Context: [NEEDS]'
+# LogGroup 'Context: [NEEDS]' {
 # $env:CONTEXT_NEEDS
+# }
+LogGroup 'Context: [INPUTS]' {
+    $env:CONTEXT_INPUTS
+}
 
-'::group::Context: [INPUTS]'
-$env:CONTEXT_INPUTS
+LogGroup "File system at [$pwd]" {
+    Get-ChildItem -Path . | Select-Object FullName | Sort-Object FullName | Format-Table -AutoSize -Wrap
+}
 
-"::group::File system at [$pwd]"
-Get-ChildItem -Path . | Select-Object FullName | Sort-Object FullName | Format-Table -AutoSize -Wrap
+LogGroup 'Environment Variables' {
+    Get-ChildItem env: | Where-Object { $_.Name -notlike 'CONTEXT_*' } | Sort-Object Name | Format-Table -AutoSize -Wrap
+}
 
-'::group::Environment Variables'
-Get-ChildItem env: | Where-Object {$_.Name -notlike 'CONTEXT_*'} | Sort-Object Name | Format-Table -AutoSize -Wrap
+LogGroup 'PowerShell variables' {
+    Get-Variable | Where-Object { $_.Name -notlike 'CONTEXT_*' } | Sort-Object Name | Format-Table -AutoSize -Wrap
+}
 
-"::group::PowerShell variables"
-Get-Variable | Where-Object {$_.Name -notlike 'CONTEXT_*'} | Sort-Object Name | Format-Table -AutoSize -Wrap
+LogGroup 'PSVersionTable' {
+    $PSVersionTable | Select-Object *
+}
 
-"::group::PSVersionTable"
-$PSVersionTable | Select-Object *
+LogGroup 'Installed Modules - List' {
+    $modules = Get-PSResource | Sort-Object -Property Name
+    Write-Verbose ($modules | Select-Object Name, Version, CompanyName, Author | Out-String)
+}
 
-"::group::ExecutionContext"
-$ExecutionContext | Select-Object *
+$modules.Name | Select-Object -Unique | ForEach-Object {
+    $name = $_
+    LogGroup "Installed Modules - Details - [$name]" {
+        Write-Verbose ($modules | Where-Object Name -EQ $name | Select-Object * | Out-String)
+    }
+}
 
-"::group::Host"
-$Host | Select-Object *
+LogGroup 'ExecutionContext' {
+    $ExecutionContext | Select-Object *
+}
 
-"::group::MyInvocation"
-$MyInvocation | Select-Object *
+LogGroup 'Host' {
+    $Host | Select-Object *
+}
 
-"::group::PSCmdlet"
-$PSCmdlet | Select-Object *
+LogGroup 'MyInvocation' {
+    $MyInvocation | Select-Object *
+}
 
-"::group::PSSessionOption"
-$PSSessionOption | Select-Object *
+LogGroup 'PSCmdlet' {
+    $PSCmdlet | Select-Object *
+}
 
-"::group::PSStyle"
-$PSStyle | Select-Object *
+LogGroup 'PSSessionOption' {
+    $PSSessionOption | Select-Object *
+}
+
+LogGroup 'PSStyle' {
+    $PSStyle | Select-Object *
+}
