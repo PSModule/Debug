@@ -13,6 +13,7 @@ runs:
       shell: pwsh
       run: |
         # Install GitHub
+        "::group::Install GitHub"
         $params = @{
           Name            = 'GitHub'
           Repository      = 'PSGallery'
@@ -21,6 +22,7 @@ runs:
         }
         Install-PSResource @params
         Import-Module -Name 'GitHub' -Force -Verbose
+        "::endgroup::"
 
     - name: Debug
       shell: pwsh
