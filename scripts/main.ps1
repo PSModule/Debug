@@ -1,5 +1,3 @@
-#REQUIRES -Modules GitHub
-
 [CmdletBinding()]
 param()
 
