@@ -79,7 +79,7 @@ LogGroup 'PowerShell variables' {
 }
 
 LogGroup 'PSVersionTable' {
-    $PSVersionTable | Select-Object * | Format-Table -AutoSize -Wrap
+    $PSVersionTable | Select-Object * | Format-List
 }
 
 LogGroup 'Installed Modules - List' {
@@ -90,30 +90,30 @@ LogGroup 'Installed Modules - List' {
 $modules.Name | Select-Object -Unique | ForEach-Object {
     $name = $_
     LogGroup "Installed Modules - Details - [$name]" {
-        $modules | Where-Object Name -EQ $name | Select-Object * | Format-Table -AutoSize -Wrap
+        $modules | Where-Object Name -EQ $name | Select-Object * | Format-List
     }
 }
 
 LogGroup 'ExecutionContext' {
-    $ExecutionContext | Select-Object * | Format-Table -AutoSize -Wrap
+    $ExecutionContext | Select-Object * | Format-List
 }
 
 LogGroup 'Host' {
-    $Host | Select-Object * | Format-Table -AutoSize -Wrap
+    $Host | Select-Object * | Format-List
 }
 
 LogGroup 'MyInvocation' {
-    $MyInvocation | Select-Object * | Format-Table -AutoSize -Wrap
+    $MyInvocation | Select-Object * | Format-List
 }
 
 LogGroup 'PSCmdlet' {
-    $PSCmdlet | Select-Object * | Format-Table -AutoSize -Wrap
+    $PSCmdlet | Select-Object * | Format-List
 }
 
 LogGroup 'PSSessionOption' {
-    $PSSessionOption | Select-Object * | Format-Table -AutoSize -Wrap
+    $PSSessionOption | Select-Object * | Format-List
 }
 
 LogGroup 'PSStyle' {
-    $PSStyle | Select-Object * | Format-Table -AutoSize -Wrap
+    $PSStyle | Select-Object * | Format-List
 }
