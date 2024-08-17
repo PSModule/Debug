@@ -79,41 +79,41 @@ LogGroup 'PowerShell variables' {
 }
 
 LogGroup 'PSVersionTable' {
-    $PSVersionTable | Select-Object *
+    $PSVersionTable | Select-Object * | Format-Table -AutoSize -Wrap
 }
 
 LogGroup 'Installed Modules - List' {
     $modules = Get-PSResource | Sort-Object -Property Name
-    $modules | Select-Object Name, Version, CompanyName, Author | Out-String
+    $modules | Select-Object Name, Version, CompanyName, Author | Format-Table -AutoSize -Wrap
 }
 
 $modules.Name | Select-Object -Unique | ForEach-Object {
     $name = $_
     LogGroup "Installed Modules - Details - [$name]" {
-        $modules | Where-Object Name -EQ $name | Select-Object * | Out-String
+        $modules | Where-Object Name -EQ $name | Select-Object * | Format-Table -AutoSize -Wrap
     }
 }
 
 LogGroup 'ExecutionContext' {
-    $ExecutionContext | Select-Object *
+    $ExecutionContext | Select-Object * | Format-Table -AutoSize -Wrap
 }
 
 LogGroup 'Host' {
-    $Host | Select-Object *
+    $Host | Select-Object * | Format-Table -AutoSize -Wrap
 }
 
 LogGroup 'MyInvocation' {
-    $MyInvocation | Select-Object *
+    $MyInvocation | Select-Object * | Format-Table -AutoSize -Wrap
 }
 
 LogGroup 'PSCmdlet' {
-    $PSCmdlet | Select-Object *
+    $PSCmdlet | Select-Object * | Format-Table -AutoSize -Wrap
 }
 
 LogGroup 'PSSessionOption' {
-    $PSSessionOption | Select-Object *
+    $PSSessionOption | Select-Object * | Format-Table -AutoSize -Wrap
 }
 
 LogGroup 'PSStyle' {
-    $PSStyle | Select-Object *
+    $PSStyle | Select-Object * | Format-Table -AutoSize -Wrap
 }
