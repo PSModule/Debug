@@ -9,23 +9,8 @@ branding:
 runs:
   using: composite
   steps:
-    - name: Install GitHub
-      shell: pwsh
-      run: |
-        # Install GitHub
-        "::group::Install GitHub"
-        $params = @{
-          Name            = 'GitHub'
-          Repository      = 'PSGallery'
-          TrustRepository = $true
-          Verbose         = $true
-        }
-        Install-PSResource @params
-        Import-Module -Name 'GitHub' -Force -Verbose
-        "::endgroup::"
-
     - name: Debug
-      shell: pwsh
+      uses: PSModule/GitHub-Script@v0
       env:
         CONTEXT_GITHUB: ${{ toJson(github) }}
         CONTEXT_ENV: ${{ toJson(env) }}
@@ -39,6 +24,7 @@ runs:
         CONTEXT_MATRIX: ${{ toJson(matrix) }}
         # CONTEXT_NEEDS: ${{ toJson(needs) }}
         CONTEXT_INPUTS: ${{ toJson(inputs) }}
-      run: |
-        # Debug environment
-        . "$env:GITHUB_ACTION_PATH\scripts\main.ps1" -Verbose
+      with:
+        Script: |
+          # Debug environment
+          . "$env:GITHUB_ACTION_PATH\scripts\main.ps1" -Verbose
