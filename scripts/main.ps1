@@ -84,13 +84,13 @@ LogGroup 'PSVersionTable' {
 
 LogGroup 'Installed Modules - List' {
     $modules = Get-PSResource | Sort-Object -Property Name
-    Write-Verbose ($modules | Select-Object Name, Version, CompanyName, Author | Out-String)
+    $modules | Select-Object Name, Version, CompanyName, Author | Out-String
 }
 
 $modules.Name | Select-Object -Unique | ForEach-Object {
     $name = $_
     LogGroup "Installed Modules - Details - [$name]" {
-        Write-Verbose ($modules | Where-Object Name -EQ $name | Select-Object * | Out-String)
+        $modules | Where-Object Name -EQ $name | Select-Object * | Out-String
     }
 }
 
