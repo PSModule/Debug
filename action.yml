@@ -25,6 +25,8 @@ runs:
         # CONTEXT_NEEDS: ${{ toJson(needs) }}
         CONTEXT_INPUTS: ${{ toJson(inputs) }}
       with:
+        Debug: true
+        Verbose: true
         Script: |
           # Debug environment
           . "${{ github.action_path }}\scripts\main.ps1" -Verbose

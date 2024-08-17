@@ -23,5 +23,3 @@ jobs:
 
       - name: Action-Test
         uses: ./
-        with:
-          Debug: true
