@@ -1,22 +1,23 @@
-# Template-action
+# Debug
 
-A template repository for GitHub Actions
+Gets debug information about the environment.
 
-Uses all the contexts and environment variables
+Uses all the contexts, environment variables and PowerShell variables and modules.
 
 - [Contexts | GitHub Docs](https://docs.github.com/en/actions/learn-github-actions/contexts)
 - [Variables | GitHub Docs](https://docs.github.com/en/actions/learn-github-actions/variables#default-environment-variables)
 
 ## Usage
 
-### Inputs
-
-### Secrets
-
-### Outputs
-
 ### Example
 
+#### Example 1: Get debug information
+
 ```yaml
-Example here
+jobs:
+  Get-Debug:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Debug
+        uses: PSModule/Debug@v1
 ```

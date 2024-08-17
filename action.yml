@@ -10,7 +10,7 @@ runs:
   using: composite
   steps:
     - name: Debug
-      uses: PSModule/GitHub-Script@v0
+      uses: PSModule/GitHub-Script@v1
       env:
         CONTEXT_GITHUB: ${{ toJson(github) }}
         CONTEXT_ENV: ${{ toJson(env) }}
