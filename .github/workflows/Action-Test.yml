@@ -18,8 +18,11 @@ permissions:
 
 jobs:
   ActionTestBasic:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
     name: Action-Test - [Basic]
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     steps:
       # Need to check out as part of the test, as its a local action
       - name: Checkout repo
