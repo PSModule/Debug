@@ -67,7 +67,7 @@ LogGroup 'Context: [INPUTS]' {
 }
 
 LogGroup "File system at [$pwd]" {
-    Get-ChildItem -Path . | Select-Object FullName | Sort-Object FullName | Format-Table -AutoSize -Wrap
+    Get-ChildItem -Path . -Force | Select-Object -ExpandProperty FullName | Sort-Object
 }
 
 LogGroup 'Environment Variables' {
