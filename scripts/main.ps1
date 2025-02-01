@@ -74,6 +74,19 @@ LogGroup 'Environment Variables' {
     Get-ChildItem env: | Where-Object { $_.Name -notlike 'CONTEXT_*' } | Sort-Object Name | Format-Table -AutoSize -Wrap
 }
 
+LogGroup '[System.Environment]' {
+    $props = @{}
+    $propsObject = [PSCustomObject]@{}
+    [System.Environment] | Get-Member -Static -MemberType Property | Where-Object { $_.Name -notin 'StackTrace' } |
+        ForEach-Object {
+            $props[$_.Name] = [System.Environment]::$($_.Name)
+        }
+    $props.GetEnumerator() | Sort-Object Name | ForEach-Object {
+        $propsObject | Add-Member -MemberType NoteProperty -Name $_.Name -Value $_.Value
+    }
+    $propsObject | Format-List
+}
+
 LogGroup 'PowerShell variables' {
     Get-Variable | Where-Object { $_.Name -notlike 'CONTEXT_*' } | Sort-Object Name | Format-Table -AutoSize -Wrap
 }
