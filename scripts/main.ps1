@@ -76,7 +76,7 @@ LogGroup 'Environment Variables' {
 
 LogGroup '[System.Environment]' {
     $props = @{}
-    [System.Environment] | Get-Member -Static -MemberType Property | ForEach-Object {
+    [System.Environment] | Get-Member -Static -MemberType Property | Where-Object { $_.Name -notin 'StackTrace' } | ForEach-Object {
         $props[$_.Name] = [System.Environment]::$($_.Name)
     }
     [PSCustomObject]$props | Format-List
