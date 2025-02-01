@@ -76,10 +76,15 @@ LogGroup 'Environment Variables' {
 
 LogGroup '[System.Environment]' {
     $props = @{}
-    [System.Environment] | Get-Member -Static -MemberType Property | Where-Object { $_.Name -notin 'StackTrace' } | ForEach-Object {
-        $props[$_.Name] = [System.Environment]::$($_.Name)
+    $propsObject = [PSCustomObject]@{}
+    [System.Environment] | Get-Member -Static -MemberType Property | Where-Object { $_.Name -notin 'StackTrace' } |
+        ForEach-Object {
+            $props[$_.Name] = [System.Environment]::$($_.Name)
+        }
+    $props.GetEnumerator() | Sort-Object Name | ForEach-Object {
+        $propsObject | Add-Member -MemberType NoteProperty -Name $_.Name -Value $_.Value
     }
-    [PSCustomObject]$props | Format-List
+    $propsObject | Format-List
 }
 
 LogGroup 'PowerShell variables' {
