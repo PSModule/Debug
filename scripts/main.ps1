@@ -74,7 +74,7 @@ LogGroup 'Environment Variables' {
     Get-ChildItem env: | Where-Object { $_.Name -notlike 'CONTEXT_*' } | Sort-Object Name | Format-Table -AutoSize -Wrap
 }
 
-LogGroup 'System.Environment' {
+LogGroup '[System.Environment]' {
     $props = @{}
     [System.Environment] | Get-Member -Static -MemberType Property | ForEach-Object {
         $props[$_.Name] = [System.Environment]::$($_.Name)
