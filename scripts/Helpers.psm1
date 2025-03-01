@@ -22,7 +22,7 @@
         Masks a GitHub fine-grained personal access token.
 
         .EXAMPLE
-        Set-MaskedValue -Value 'ghp_abcdefghijklmnopqrstuvwxyz0123456789' #GITLEAKS:IGNORE
+        Set-MaskedValue -Value 'ghp_abcdefghijklmnopqrstuvwxyz0123456789' #gitleaks:allow
 
         Output:
         ```powershell
