@@ -74,13 +74,13 @@ LogGroup "File system at [$pwd]" {
 }
 
 LogGroup 'Environment Variables' {
+    $vars = @{}
     Get-ChildItem env: | Where-Object { $_.Name -notlike 'CONTEXT_*' } | ForEach-Object {
         $name = $_.Name
         $value = $_.Value | Set-MaskedValue
-        [PSCustomObject]@{
-            $name = $value
-        }
-    } | Sort-Object Name | Format-Table -AutoSize -Wrap
+        $vars[$name] = $value
+    }
+    [pscustomobject]$vars | Sort-Object Name | Format-Table -AutoSize -Wrap
 }
 
 LogGroup '[System.Environment]' {
@@ -101,7 +101,7 @@ LogGroup 'PowerShell variables' {
 }
 
 LogGroup 'PSVersionTable' {
-    $PSVersionTable | Select-Object * | Format-List
+    $PSVersionTable | Select-Object * | Format-List | Out-String
 }
 
 LogGroup 'Installed Modules - List' {
