@@ -70,23 +70,23 @@
     )
 
     switch -Regex ($Value) {
-        'github_pat_' {
+        '^github_pat_' {
             '***GITHUB_FG_PAT_TOKEN***'
             break
         }
-        'ghp_' {
+        '^ghp_' {
             '***GITHUB_CLASSIC_PAT_TOKEN***'
             break
         }
-        'ghs_' {
+        '^ghs_' {
             '***GITHUB_SESSION_TOKEN***'
             break
         }
-        'ghu_' {
+        '^ghu_' {
             '***GITHUB_USER_TOKEN***'
             break
         }
-        'gho_' {
+        '^gho_' {
             '***GITHUB_OAUTH_TOKEN***'
             break
         }
