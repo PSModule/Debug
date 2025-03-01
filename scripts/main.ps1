@@ -75,10 +75,7 @@ LogGroup "File system at [$pwd]" {
 LogGroup 'Environment Variables' {
     Get-ChildItem env: | Where-Object { $_.Name -notlike 'CONTEXT_*' } | ForEach-Object {
         $name = $_.Name
-        $value = $_.Value
-        if ($name -like '*_PAT') {
-            $value = Set-MaskedValue -Value $value
-        }
+        $value = $_.Value | Set-MaskedValue 
         [PSCustomObject]@{
             $name = $value
         }
