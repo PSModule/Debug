@@ -1,6 +1,9 @@
 [CmdletBinding()]
 param()
 
+$PSStyle.OutputRendering = 'Ansi'
+Import-Module "$PSScriptRoot/Helpers.psm1"
+
 $CONTEXT_GITHUB = $env:CONTEXT_GITHUB | ConvertFrom-Json -Depth 100
 
 LogGroup 'Context: [GITHUB]' {
@@ -71,7 +74,13 @@ LogGroup "File system at [$pwd]" {
 }
 
 LogGroup 'Environment Variables' {
-    Get-ChildItem env: | Where-Object { $_.Name -notlike 'CONTEXT_*' } | Sort-Object Name | Format-Table -AutoSize -Wrap
+    $vars = [ordered]@{}
+    Get-ChildItem env: | Where-Object { $_.Name -notlike 'CONTEXT_*' } | Sort-Object Name | ForEach-Object {
+        $name = $_.Name
+        $value = $_.Value | Set-MaskedValue
+        $vars.Add($name, $value)
+    }
+    [pscustomobject]$vars | Format-List | Out-String
 }
 
 LogGroup '[System.Environment]' {
@@ -84,49 +93,55 @@ LogGroup '[System.Environment]' {
     $props.GetEnumerator() | Sort-Object Name | ForEach-Object {
         $propsObject | Add-Member -MemberType NoteProperty -Name $_.Name -Value $_.Value
     }
-    $propsObject | Format-List
+    $propsObject | Format-List | Out-String
 }
 
 LogGroup 'PowerShell variables' {
-    Get-Variable | Where-Object { $_.Name -notlike 'CONTEXT_*' } | Sort-Object Name | Format-Table -AutoSize -Wrap
+    $vars = [ordered]@{}
+    Get-Variable | Where-Object { $_.Name -notlike 'CONTEXT_*' } | Select-Object -Property Name, Value | Sort-Object Name | ForEach-Object {
+        $name = $_.Name
+        $value = $_.Value | Set-MaskedValue
+        $vars.Add($name, $value)
+    }
+    [pscustomobject]$vars | Format-List | Out-String
 }
 
 LogGroup 'PSVersionTable' {
-    $PSVersionTable | Select-Object * | Format-List
+    $PSVersionTable | Select-Object * | Format-List | Out-String
 }
 
 LogGroup 'Installed Modules - List' {
     $modules = Get-PSResource | Sort-Object -Property Name
-    $modules | Select-Object Name, Version, CompanyName, Author | Format-Table -AutoSize -Wrap
+    $modules | Select-Object Name, Version, CompanyName, Author | Format-Table -AutoSize -Wrap | Out-String
 }
 
 $modules.Name | Select-Object -Unique | ForEach-Object {
     $name = $_
     LogGroup "Installed Modules - Details - [$name]" {
-        $modules | Where-Object Name -EQ $name | Select-Object * | Format-List
+        $modules | Where-Object Name -EQ $name | Select-Object * | Format-List | Out-String
     }
 }
 
 LogGroup 'ExecutionContext' {
-    $ExecutionContext | Select-Object * | Format-List
+    $ExecutionContext | ConvertTo-Json -Depth 3
 }
 
 LogGroup 'Host' {
-    $Host | Select-Object * | Format-List
+    $Host | Select-Object * | Format-List | Out-String
 }
 
 LogGroup 'MyInvocation' {
-    $MyInvocation | Select-Object * | Format-List
+    $MyInvocation | Select-Object * | Format-List | Out-String
 }
 
 LogGroup 'PSCmdlet' {
-    $PSCmdlet | Select-Object * | Format-List
+    $PSCmdlet | Select-Object * | Format-List | Out-String
 }
 
 LogGroup 'PSSessionOption' {
-    $PSSessionOption | Select-Object * | Format-List
+    $PSSessionOption | Select-Object * | Format-List | Out-String
 }
 
 LogGroup 'PSStyle' {
-    $PSStyle | Select-Object * | Format-List
+    $PSStyle | Select-Object * | Format-List | Out-String
 }

@@ -1,17 +1,27 @@
-# Debug
+# Debug Action
 
-Gets debug information about the environment.
+Prints comprehensive debug information about the GitHub Actions runner environment, contexts, environment variables, and PowerShell state.
 
-Uses all the contexts, environment variables and PowerShell variables and modules.
-
-- [Contexts | GitHub Docs](https://docs.github.com/en/actions/learn-github-actions/contexts)
-- [Variables | GitHub Docs](https://docs.github.com/en/actions/learn-github-actions/variables#default-environment-variables)
+> [!CAUTION]
+> This action exposes environment variables and contexts, which may include sensitive information or secrets. GitHub attempts to mask
+> secrets in logs, but if a secret contains newlines (common with private keys) due to PowerShell's formatting, GitHub masking may fail and
+> inadvertently expose the secret.
 
 ## Usage
 
-### Example
+### Inputs
 
-#### Example 1: Get debug information
+This action does not currently require any inputs.
+
+### Secrets
+
+This action does not explicitly require secrets but may display environment variables or contexts containing sensitive information. Use with caution.
+
+### Outputs
+
+This action does not provide outputs.
+
+## Example
 
 ```yaml
 jobs:
@@ -21,3 +31,17 @@ jobs:
       - name: Debug
         uses: PSModule/Debug@v1
 ```
+
+## Information Displayed
+
+- [GitHub Context](https://docs.github.com/en/actions/learn-github-actions/contexts)
+- [Environment Variables](https://docs.github.com/en/actions/learn-github-actions/variables#default-environment-variables)
+- GitHub event payload details
+- PowerShell environment details including:
+  - Variables
+  - Installed Modules
+  - Execution context
+  - Host details
+  - Invocation details
+  - PowerShell session options
+  - PowerShell version details

@@ -29,4 +29,4 @@ runs:
         Verbose: true
         Script: |
           # Debug environment
-          ${{ github.action_path }}\scripts\main.ps1
+          ${{ github.action_path }}/scripts/main.ps1
