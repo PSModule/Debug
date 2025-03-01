@@ -12,7 +12,7 @@
         If no match is found, the original value is returned unaltered.
 
         .EXAMPLE
-        Set-MaskedValue -Value 'github_pat_1234567890123456789012' #GITLEAKS:IGNORE
+        Set-MaskedValue -Value 'github_pat_1234567890123456789012'
 
         Output:
         ```powershell
