@@ -97,7 +97,7 @@ LogGroup '[System.Environment]' {
 }
 
 LogGroup 'PowerShell variables' {
-    Get-Variable | Where-Object { $_.Name -notlike 'CONTEXT_*' } | Sort-Object Name | Format-List | Out-String
+    Get-Variable | Where-Object { $_.Name -notlike 'CONTEXT_*' } | Select-Object -Property Name, Value | Sort-Object Name | Format-List | Out-String
 }
 
 LogGroup 'PSVersionTable' {
@@ -112,30 +112,30 @@ LogGroup 'Installed Modules - List' {
 $modules.Name | Select-Object -Unique | ForEach-Object {
     $name = $_
     LogGroup "Installed Modules - Details - [$name]" {
-        $modules | Where-Object Name -EQ $name | Select-Object * | Format-List
+        $modules | Where-Object Name -EQ $name | Select-Object * | Format-List | Out-String
     }
 }
 
 LogGroup 'ExecutionContext' {
-    $ExecutionContext | Select-Object * | Format-List
+    $ExecutionContext | ConvertTo-Json -Depth 3
 }
 
 LogGroup 'Host' {
-    $Host | Select-Object * | Format-List
+    $Host | Select-Object * | Format-List | Out-String
 }
 
 LogGroup 'MyInvocation' {
-    $MyInvocation | Select-Object * | Format-List
+    $MyInvocation | Select-Object * | Format-List | Out-String
 }
 
 LogGroup 'PSCmdlet' {
-    $PSCmdlet | Select-Object * | Format-List
+    $PSCmdlet | Select-Object * | Format-List | Out-String
 }
 
 LogGroup 'PSSessionOption' {
-    $PSSessionOption | Select-Object * | Format-List
+    $PSSessionOption | Select-Object * | Format-List | Out-String
 }
 
 LogGroup 'PSStyle' {
-    $PSStyle | Select-Object * | Format-List
+    $PSStyle | Select-Object * | Format-List | Out-String
 }
