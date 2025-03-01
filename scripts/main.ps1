@@ -1,6 +1,8 @@
 [CmdletBinding()]
 param()
 
+. "$PSScriptRoot/Helpers.psm1"
+
 $CONTEXT_GITHUB = $env:CONTEXT_GITHUB | ConvertFrom-Json -Depth 100
 
 LogGroup 'Context: [GITHUB]' {
@@ -71,7 +73,11 @@ LogGroup "File system at [$pwd]" {
 }
 
 LogGroup 'Environment Variables' {
-    Get-ChildItem env: | Where-Object { $_.Name -notlike 'CONTEXT_*' } | Sort-Object Name | Format-Table -AutoSize -Wrap
+    Get-ChildItem env: |
+        Where-Object { $_.Name -notlike 'CONTEXT_*' } |
+        Sort-Object Name |
+        Select-Object Name, @{Name = 'Value'; Expression = { Set-MaskedValue -Value $_.Value } } |
+        Format-Table -AutoSize -Wrap
 }
 
 LogGroup '[System.Environment]' {
