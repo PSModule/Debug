@@ -80,7 +80,7 @@ LogGroup 'Environment Variables' {
         $value = $_.Value | Set-MaskedValue
         $vars[$name] = $value
     }
-    [pscustomobject]$vars | Sort-Object Name | Format-List
+    [pscustomobject]$vars | Sort-Object Name | Format-List | Out-String
 }
 
 LogGroup '[System.Environment]' {
