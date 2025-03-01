@@ -90,7 +90,7 @@
             '***GITHUB_OAUTH_TOKEN***'
             break
         }
-        '.*\..*\..*' {
+        '^[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+$' {
             '***JWT_TOKEN***'
             break
         }
