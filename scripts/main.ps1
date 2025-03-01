@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param()
 
-. "$PSScriptRoot/Helpers.psm1"
+Import-Module "$PSScriptRoot/Helpers.psm1"
 
 $CONTEXT_GITHUB = $env:CONTEXT_GITHUB | ConvertFrom-Json -Depth 100
 
