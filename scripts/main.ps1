@@ -97,8 +97,13 @@ LogGroup '[System.Environment]' {
 }
 
 LogGroup 'PowerShell variables' {
-    Get-Variable | Where-Object { $_.Name -notlike 'CONTEXT_*' } | Select-Object -Property Name, Value | Sort-Object Name |
-        Format-Table -AutoSize | Out-String
+    $vars = [ordered]@{}
+    Get-Variable | Where-Object { $_.Name -notlike 'CONTEXT_*' } | Select-Object -Property Name, Value | Sort-Object Name | ForEach-Object {
+        $name = $_.Name
+        $value = $_.Value | Set-MaskedValue
+        $vars.Add($name, $value)
+    }
+    [pscustomobject]$vars | Format-Table | Out-String
 }
 
 LogGroup 'PSVersionTable' {
