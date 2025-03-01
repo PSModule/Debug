@@ -73,11 +73,16 @@ LogGroup "File system at [$pwd]" {
 }
 
 LogGroup 'Environment Variables' {
-    Get-ChildItem env: |
-        Where-Object { $_.Name -notlike 'CONTEXT_*' } |
-        Sort-Object Name |
-        Select-Object Name, @{Name = 'Value'; Expression = { Set-MaskedValue -Value $_.Value } } |
-        Format-Table -AutoSize -Wrap
+    Get-ChildItem env: | Where-Object { $_.Name -notlike 'CONTEXT_*' } | ForEach-Object {
+        $name = $_.Name
+        $value = $_.Value
+        if ($name -like '*_PAT') {
+            $value = Set-MaskedValue -Value $value
+        }
+        [PSCustomObject]@{
+            $name = $value
+        }
+    } | Sort-Object Name | Format-Table -AutoSize -Wrap
 }
 
 LogGroup '[System.Environment]' {

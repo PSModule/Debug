@@ -1,4 +1,4 @@
-﻿function Set-MaskedValue {
+﻿filter Set-MaskedValue {
     <#
         .SYNOPSIS
         Masks sensitive values such as GitHub tokens, JWT tokens, and private keys.
@@ -65,34 +65,41 @@
     [CmdletBinding()]
     param (
         # The value to be checked and potentially masked.
-        [Parameter(Mandatory)]
+        [Parameter(Mandatory, ValueFromPipeline)]
         [string] $Value
     )
 
     switch -Regex ($Value) {
         'github_pat_' {
-            return '***GITHUB_FG_PAT_TOKEN***'
+            '***GITHUB_FG_PAT_TOKEN***'
+            break
         }
         'ghp_' {
-            return '***GITHUB_CLASSIC_PAT_TOKEN***'
+            '***GITHUB_CLASSIC_PAT_TOKEN***'
+            break
         }
         'ghs_' {
-            return '***GITHUB_SESSION_TOKEN***'
+            '***GITHUB_SESSION_TOKEN***'
+            break
         }
         'ghu_' {
-            return '***GITHUB_USER_TOKEN***'
+            '***GITHUB_USER_TOKEN***'
+            break
         }
         'gho_' {
-            return '***GITHUB_OAUTH_TOKEN***'
+            '***GITHUB_OAUTH_TOKEN***'
+            break
         }
         '.*\..*\..*' {
-            return '***JWT_TOKEN***'
+            '***JWT_TOKEN***'
+            break
         }
         'PRIVATE KEY.*[\s\S]+?.*PRIVATE KEY' {
-            return '***PRIVATE_KEY***'
+            '***PRIVATE_KEY***'
+            break
         }
         default {
-            return $Value
+            $Value
         }
     }
 }
