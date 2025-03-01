@@ -103,7 +103,7 @@ LogGroup 'PowerShell variables' {
         $value = $_.Value | Set-MaskedValue
         $vars.Add($name, $value)
     }
-    [pscustomobject]$vars | Format-Table | Out-String
+    [pscustomobject]$vars | Format-List | Out-String
 }
 
 LogGroup 'PSVersionTable' {
