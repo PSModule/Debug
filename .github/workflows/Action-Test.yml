@@ -16,6 +16,9 @@ permissions:
   contents: read
   pull-requests: read
 
+env:
+  PSMODULE_DEBUG_FAKE_PRIVATE_KEY: ${{ secrets.PSMODULE_DEBUG_FAKE_PRIVATE_KEY }}
+
 jobs:
   ActionTestBasic:
     strategy:
