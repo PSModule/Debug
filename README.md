@@ -2,9 +2,10 @@
 
 Prints comprehensive debug information about the GitHub Actions runner environment, contexts, environment variables, and PowerShell state.
 
-> [!CAUTION] This action exposes environment variables and contexts, which may include sensitive information or secrets. GitHub attempts to mask
-secrets in logs, but if a secret contains newlines (common with private keys) due to PowerShell's formatting, GitHub masking may fail and
-inadvertently expose the secret.
+> [!CAUTION]
+> This action exposes environment variables and contexts, which may include sensitive information or secrets. GitHub attempts to mask
+> secrets in logs, but if a secret contains newlines (common with private keys) due to PowerShell's formatting, GitHub masking may fail and
+> inadvertently expose the secret.
 
 ## Usage
 
