@@ -44,8 +44,3 @@ jobs:
   - Invocation details
   - PowerShell session options
   - PowerShell version details
-
-## Disclaimer
-
-Use caution with this debug action in environments that include sensitive or private data. Always review logs for exposed secrets, particularly
-those containing newlines, as GitHub's secret masking may not fully protect multiline values such as private keys.
