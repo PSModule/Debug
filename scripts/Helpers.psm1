@@ -65,8 +65,8 @@
     [CmdletBinding()]
     param (
         # The value to be checked and potentially masked.
-        [Parameter(Mandatory, ValueFromPipeline)]
-        [string] $Value
+        [Parameter(ValueFromPipeline)]
+        [string] $Value = ''
     )
 
     switch -Regex ($Value) {
