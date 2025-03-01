@@ -141,14 +141,14 @@ LogGroup 'PSStyle' {
 }
 
 [pscustomobject]@{
-    'Something'                    = 'Something'
-    'Private Key'                  = $env:PSMODULE_DEBUG_FAKE_PRIVATE_KEY
-    'GitHub PAT'                   = 'ghp_abcdefghijklmnopqrstuvwxyz0123456789'
-    'JWT'                          = 'header.payload.signature'
-    'GitHub FG PAT'                = 'github_pat_1234567890123456789012'
-    'GitHub FG PAT (Enterprise)'   = 'github_pat_1234567890123456789012'
-    'GitHub FG PAT (Organization)' = 'github_pat_1234567890123456789012'
-    'GitHub FG PAT (Repository)'   = 'github_pat_1234567890123456789012'
-    'GitHub FG PAT (Job)'          = 'github_pat_1234567890123456789012'
-    'GitHub FG PAT (Step)'         = 'github_pat_1234567890123456789012'
+    'Something'                    = 'Something' | Set-MaskedValue
+    'Private Key'                  = $env:PSMODULE_DEBUG_FAKE_PRIVATE_KEY | Set-MaskedValue
+    'GitHub PAT'                   = 'ghp_abcdefghijklmnopqrstuvwxyz0123456789' | Set-MaskedValue
+    'JWT'                          = 'header.payload.signature' | Set-MaskedValue
+    'GitHub FG PAT'                = 'github_pat_1234567890123456789012' | Set-MaskedValue
+    'GitHub FG PAT (Enterprise)'   = 'github_pat_1234567890123456789012' | Set-MaskedValue
+    'GitHub FG PAT (Organization)' = 'github_pat_1234567890123456789012' | Set-MaskedValue
+    'GitHub FG PAT (Repository)'   = 'github_pat_1234567890123456789012' | Set-MaskedValue
+    'GitHub FG PAT (Job)'          = 'github_pat_1234567890123456789012' | Set-MaskedValue
+    'GitHub FG PAT (Step)'         = 'github_pat_1234567890123456789012' | Set-MaskedValue
 } | Format-List | Out-String
