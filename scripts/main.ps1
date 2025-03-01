@@ -1,6 +1,7 @@
 [CmdletBinding()]
 param()
 
+$PSStyle.OutputRendering = 'Ansi'
 Import-Module "$PSScriptRoot/Helpers.psm1"
 
 $CONTEXT_GITHUB = $env:CONTEXT_GITHUB | ConvertFrom-Json -Depth 100
@@ -92,7 +93,7 @@ LogGroup '[System.Environment]' {
     $props.GetEnumerator() | Sort-Object Name | ForEach-Object {
         $propsObject | Add-Member -MemberType NoteProperty -Name $_.Name -Value $_.Value
     }
-    $propsObject | Format-List
+    $propsObject | Format-List | Out-String
 }
 
 LogGroup 'PowerShell variables' {
