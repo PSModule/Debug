@@ -74,13 +74,13 @@ LogGroup "File system at [$pwd]" {
 }
 
 LogGroup 'Environment Variables' {
-    $vars = @{}
-    Get-ChildItem env: | Where-Object { $_.Name -notlike 'CONTEXT_*' } | ForEach-Object {
+    $vars = [ordered]@{}
+    Get-ChildItem env: | Where-Object { $_.Name -notlike 'CONTEXT_*' } | Sort-Object Name | ForEach-Object {
         $name = $_.Name
         $value = $_.Value | Set-MaskedValue
-        $vars[$name] = $value
+        $vars.Add($name, $value)
     }
-    [pscustomobject]$vars | Sort-Object Name | Format-List | Out-String
+    [pscustomobject]$vars | Format-List | Out-String
 }
 
 LogGroup '[System.Environment]' {
@@ -139,16 +139,3 @@ LogGroup 'PSSessionOption' {
 LogGroup 'PSStyle' {
     $PSStyle | Select-Object * | Format-List | Out-String
 }
-
-[pscustomobject]@{
-    'Something'                    = 'Something' | Set-MaskedValue
-    'Private Key'                  = $env:PSMODULE_DEBUG_FAKE_PRIVATE_KEY | Set-MaskedValue
-    'GitHub PAT'                   = 'ghp_abcdefghijklmnopqrstuvwxyz0123456789' | Set-MaskedValue
-    'JWT'                          = 'header.payload.signature' | Set-MaskedValue
-    'GitHub FG PAT'                = 'github_pat_1234567890123456789012' | Set-MaskedValue
-    'GitHub FG PAT (Enterprise)'   = 'github_pat_1234567890123456789012' | Set-MaskedValue
-    'GitHub FG PAT (Organization)' = 'github_pat_1234567890123456789012' | Set-MaskedValue
-    'GitHub FG PAT (Repository)'   = 'github_pat_1234567890123456789012' | Set-MaskedValue
-    'GitHub FG PAT (Job)'          = 'github_pat_1234567890123456789012' | Set-MaskedValue
-    'GitHub FG PAT (Step)'         = 'github_pat_1234567890123456789012' | Set-MaskedValue
-} | Format-List | Out-String
