@@ -97,7 +97,7 @@ LogGroup '[System.Environment]' {
 }
 
 LogGroup 'PowerShell variables' {
-    Get-Variable | Where-Object { $_.Name -notlike 'CONTEXT_*' } | Sort-Object Name | Format-Table -AutoSize -Wrap
+    Get-Variable | Where-Object { $_.Name -notlike 'CONTEXT_*' } | Sort-Object Name | Format-List | Out-String
 }
 
 LogGroup 'PSVersionTable' {
@@ -106,7 +106,7 @@ LogGroup 'PSVersionTable' {
 
 LogGroup 'Installed Modules - List' {
     $modules = Get-PSResource | Sort-Object -Property Name
-    $modules | Select-Object Name, Version, CompanyName, Author | Format-Table -AutoSize -Wrap
+    $modules | Select-Object Name, Version, CompanyName, Author | Format-Table -AutoSize -Wrap | Out-String
 }
 
 $modules.Name | Select-Object -Unique | ForEach-Object {
