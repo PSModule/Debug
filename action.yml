@@ -14,15 +14,15 @@ runs:
       env:
         CONTEXT_GITHUB: ${{ toJson(github) }}
         CONTEXT_ENV: ${{ toJson(env) }}
-        # CONTEXT_VARS: ${{ toJson(vars) }}
+        CONTEXT_VARS: ${{ toJson(vars) }}
         CONTEXT_JOB: ${{ toJson(job) }}
-        # CONTEXT_JOBS: ${{ toJson(jobs) }}
+        CONTEXT_JOBS: ${{ toJson(jobs) }}
         CONTEXT_STEPS: ${{ toJson(steps) }}
         CONTEXT_RUNNER: ${{ toJson(runner) }}
-        # CONTEXT_SECRETS: ${{ toJson(secrets) }}
+        CONTEXT_SECRETS: ${{ toJson(secrets) }}
         CONTEXT_STRATEGY: ${{ toJson(strategy) }}
         CONTEXT_MATRIX: ${{ toJson(matrix) }}
-        # CONTEXT_NEEDS: ${{ toJson(needs) }}
+        CONTEXT_NEEDS: ${{ toJson(needs) }}
         CONTEXT_INPUTS: ${{ toJson(inputs) }}
       with:
         Debug: true

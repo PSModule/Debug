@@ -30,17 +30,17 @@ LogGroup 'Context: [ENV]' {
     $env:CONTEXT_ENV
 }
 
-# LogGroup 'Context: [VARS]' {
-# $env:CONTEXT_VARS
-# }
+LogGroup 'Context: [VARS]' {
+    $env:CONTEXT_VARS
+}
 
 LogGroup 'Context: [JOB]' {
     $env:CONTEXT_JOB
 }
 
-# LogGroup 'Context: [JOBS]' {
-# $env:CONTEXT_JOBS
-# }
+LogGroup 'Context: [JOBS]' {
+    $env:CONTEXT_JOBS
+}
 
 LogGroup 'Context: [STEPS]' {
     $env:CONTEXT_STEPS
@@ -50,9 +50,9 @@ LogGroup 'Context: [RUNNER]' {
     $env:CONTEXT_RUNNER
 }
 
-# LogGroup 'Context: [SECRETS]' {
-# $env:CONTEXT_SECRETS
-# }
+LogGroup 'Context: [SECRETS]' {
+    $env:CONTEXT_SECRETS
+}
 
 LogGroup 'Context: [STRATEGY]' {
     $env:CONTEXT_STRATEGY
@@ -62,9 +62,10 @@ LogGroup 'Context: [MATRIX]' {
     $env:CONTEXT_MATRIX
 }
 
-# LogGroup 'Context: [NEEDS]' {
-# $env:CONTEXT_NEEDS
-# }
+LogGroup 'Context: [NEEDS]' {
+    $env:CONTEXT_NEEDS
+}
+
 LogGroup 'Context: [INPUTS]' {
     $env:CONTEXT_INPUTS
 }
