@@ -131,7 +131,7 @@ LogGroup 'Host' {
 }
 
 LogGroup 'Host - Json' {
-    Write-Host "$($Host | ConvertTo-Json -Depth 10)"
+    $Host | ConvertTo-Json -Depth 3
 }
 
 LogGroup 'MyInvocation' {
@@ -151,5 +151,5 @@ LogGroup 'PSStyle' {
 }
 
 LogGroup 'PSStyle - Json' {
-    Write-Host "$($PSStyle | ConvertTo-Json -Depth 10)"
+    $PSStyle | ConvertTo-Json -Depth 3
 }
