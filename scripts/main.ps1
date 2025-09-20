@@ -130,6 +130,10 @@ LogGroup 'Host' {
     $Host | Select-Object * | Format-List | Out-String
 }
 
+LogGroup 'Host - Json' {
+    $Host | ConvertTo-Json -Depth 3
+}
+
 LogGroup 'MyInvocation' {
     $MyInvocation | Select-Object * | Format-List | Out-String
 }
@@ -144,4 +148,8 @@ LogGroup 'PSSessionOption' {
 
 LogGroup 'PSStyle' {
     $PSStyle | Select-Object * | Format-List | Out-String
+}
+
+LogGroup 'PSStyle - Json' {
+    $PSStyle | ConvertTo-Json -Depth 3
 }
