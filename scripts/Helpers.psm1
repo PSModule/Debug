@@ -12,7 +12,7 @@
         If no match is found, the original value is returned unaltered.
 
         .EXAMPLE
-        Set-MaskedValue -Value 'github_pat_1234567890123456789012'
+        Set-MaskedValue -Value '<a token starting with github_pat_>'
 
         Output:
         ```powershell
@@ -22,7 +22,7 @@
         Masks a GitHub fine-grained personal access token.
 
         .EXAMPLE
-        Set-MaskedValue -Value 'ghp_abcdefghijklmnopqrstuvwxyz0123456789' #gitleaks:allow
+        Set-MaskedValue -Value '<a token starting with ghp_>'
 
         Output:
         ```powershell
