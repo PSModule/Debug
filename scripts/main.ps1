@@ -71,11 +71,11 @@ LogGroup 'Context: [INPUTS]' {
 }
 
 LogGroup 'Network Info' {
-    Get-NetIPConfiguration
+    Write-Host "$(Get-NetIPConfiguration | Out-String)"
 }
 
 LogGroup 'Public IP Info' {
-    Get-PublicIP
+    Write-Host "$(Get-PublicIP | Out-String)"
 }
 
 
