@@ -11,22 +11,6 @@ LogGroup 'Context: [GITHUB]' {
     $CONTEXT_GITHUB | ConvertTo-Json -Depth 100
 }
 
-LogGroup 'Context: [GITHUB_EVENT]' {
-    $CONTEXT_GITHUB.event | ConvertTo-Json -Depth 100
-}
-
-LogGroup 'Context: [GITHUB_EVENT_ENTERPRISE]' {
-    $CONTEXT_GITHUB | ConvertTo-Json -Depth 100
-}
-
-LogGroup 'Context: [GITHUB_EVENT_ORGANIZATION]' {
-    $CONTEXT_GITHUB.event.organization | ConvertTo-Json -Depth 100
-}
-
-LogGroup 'Context: [GITHUB_EVENT_REPOSITORY]' {
-    $CONTEXT_GITHUB.event.repository | ConvertTo-Json -Depth 100
-}
-
 LogGroup 'Context: [ENV]' {
     $env:CONTEXT_ENV
 }
