@@ -1,7 +1,8 @@
 [CmdletBinding()]
 param()
 
-$PSStyle.OutputRendering = 'Ansi'
+Install-PSResource -Repository PSGallery -TrustRepository -Name Net
+Install-PSResource -Repository PSGallery -TrustRepository -Name PublicIP
 Import-Module "$PSScriptRoot/Helpers.psm1"
 
 $CONTEXT_GITHUB = $env:CONTEXT_GITHUB | ConvertFrom-Json -Depth 100
@@ -68,6 +69,15 @@ LogGroup 'Context: [MATRIX]' {
 LogGroup 'Context: [INPUTS]' {
     $env:CONTEXT_INPUTS
 }
+
+LogGroup 'Network Info' {
+    Write-Host "$(Get-NetIPConfiguration | Out-String)"
+}
+
+LogGroup 'Public IP Info' {
+    Write-Host "$(Get-PublicIP | Out-String)"
+}
+
 
 LogGroup "File system at [$pwd]" {
     Get-ChildItem -Path . -Force | Select-Object -ExpandProperty FullName | Sort-Object
