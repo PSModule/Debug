@@ -1,29 +1,14 @@
 [CmdletBinding()]
 param()
 
-$PSStyle.OutputRendering = 'Ansi'
+Install-PSResource -Repository PSGallery -TrustRepository -Name Net
+Install-PSResource -Repository PSGallery -TrustRepository -Name PublicIP
 Import-Module "$PSScriptRoot/Helpers.psm1"
 
 $CONTEXT_GITHUB = $env:CONTEXT_GITHUB | ConvertFrom-Json -Depth 100
 
 LogGroup 'Context: [GITHUB]' {
     $CONTEXT_GITHUB | ConvertTo-Json -Depth 100
-}
-
-LogGroup 'Context: [GITHUB_EVENT]' {
-    $CONTEXT_GITHUB.event | ConvertTo-Json -Depth 100
-}
-
-LogGroup 'Context: [GITHUB_EVENT_ENTERPRISE]' {
-    $CONTEXT_GITHUB | ConvertTo-Json -Depth 100
-}
-
-LogGroup 'Context: [GITHUB_EVENT_ORGANIZATION]' {
-    $CONTEXT_GITHUB.event.organization | ConvertTo-Json -Depth 100
-}
-
-LogGroup 'Context: [GITHUB_EVENT_REPOSITORY]' {
-    $CONTEXT_GITHUB.event.repository | ConvertTo-Json -Depth 100
 }
 
 LogGroup 'Context: [ENV]' {
@@ -68,6 +53,15 @@ LogGroup 'Context: [MATRIX]' {
 LogGroup 'Context: [INPUTS]' {
     $env:CONTEXT_INPUTS
 }
+
+LogGroup 'Network Info' {
+    Write-Host "$(Get-NetIPConfiguration | Out-String)"
+}
+
+LogGroup 'Public IP Info' {
+    Write-Host "$(Get-PublicIP | Out-String)"
+}
+
 
 LogGroup "File system at [$pwd]" {
     Get-ChildItem -Path . -Force | Select-Object -ExpandProperty FullName | Sort-Object
