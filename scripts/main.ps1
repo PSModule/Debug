@@ -1,4 +1,4 @@
-[CmdletBinding()]
+﻿[CmdletBinding()]
 param()
 
 Install-PSResource -Repository PSGallery -TrustRepository -Name Net
