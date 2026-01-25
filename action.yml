@@ -6,12 +6,19 @@ branding:
   icon: clipboard
   color: gray-dark
 
+inputs:
+  Token:
+    description: The GitHub token to use for authentication.
+    required: false
+    default: ${{ github.token }}
+
 runs:
   using: composite
   steps:
     - name: Debug
-      uses: PSModule/GitHub-Script@v1
+      uses: PSModule/GitHub-Script@0097f3bbe3f413f3b577b9bcc600727b0ca3201a # v1.7.10
       env:
+        GITHUB_TOKEN: ${{ inputs.Token }}
         CONTEXT_GITHUB: ${{ toJson(github) }}
         CONTEXT_ENV: ${{ toJson(env) }}
         # CONTEXT_VARS: ${{ toJson(vars) }}
@@ -28,4 +35,4 @@ runs:
         Name: Debug
         Script: |
           # Debug environment
-          ${{ github.action_path }}/scripts/main.ps1
+          ${{ github.action_path }}/src/main.ps1
