@@ -23,7 +23,7 @@ jobs:
   ActionTestBasic:
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [ubuntu-24.04, windows-2025, macos-15]
     name: Action-Test - [Basic]
     runs-on: ${{ matrix.os }}
     steps:
