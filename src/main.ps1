@@ -3,7 +3,7 @@ param()
 
 Install-PSResource -Repository PSGallery -TrustRepository -Name Net
 Install-PSResource -Repository PSGallery -TrustRepository -Name PublicIP
-Import-Module "$PSScriptRoot/Helpers.psm1"
+Import-Module "$PSScriptRoot/Debug.Helpers.psm1"
 
 $CONTEXT_GITHUB = $env:CONTEXT_GITHUB | ConvertFrom-Json -Depth 100
 
